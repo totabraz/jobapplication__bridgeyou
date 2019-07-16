@@ -12,6 +12,7 @@ class Page extends CI_Controller {
     public function home(){
 		$this->load->view('header');
 		$this->load->view('list-users');
+		$this->load->view('registration');
 		$this->load->view('footer');
 
     }
