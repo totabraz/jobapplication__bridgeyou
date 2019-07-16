@@ -30,10 +30,11 @@ body {
 
 
 .linearcards {
-    background-color: $green-light;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    .-card {
+	background-color: $green-light;
+	padding-top: 30px;
+	padding-bottom: 30px;
+
+	.-card {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -43,4 +44,30 @@ body {
 
 .huge-icon {
 	font-size: 70px;
+}
+
+table>tfoot,
+.table>thead,
+.table>tbody {
+    tr, th{
+        min-height: 55px;
+    }
+    .area-btn-trash{
+        min-width: 60px;
+        padding: 0px;
+    }
+	.table-btn-trash {
+        display: none;
+    }
+    tr:hover{
+        .table-btn-trash {
+            display: inline-block;
+        }
+    }
+
+	// tr:hover {
+	// 	.table-btn-trash {
+	// 		display: inline-block;
+	// 	}
+	// }
 }
