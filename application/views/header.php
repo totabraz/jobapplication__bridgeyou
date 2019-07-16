@@ -26,7 +26,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="brand-header flex-row -center" href="#">
+                        <div class="brand-header flex-row -center">
                             <div class="huge-icon">
                                 <i class="fas fa-question-circle"></i>
                             </div>
@@ -35,7 +35,7 @@
                                 if (isset($page_title)) echo $page_title;
                                 else "Venturus Sports"; ?>
                             </h1>
-                        </a>
+                        </div>
                     </div>
                     <nav class="navbar navbar-right">
                         <ul class="nav navbar-nav navbar-right">
@@ -45,12 +45,10 @@
                             <li class="">
                                 <a href="#" class="" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="name-nav-dropdown">Perfil</span> <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-
                                     <li><a href="#">Friends List</a></li>
                                     <li><a href="#">Saved Items</a></li>
                                     <li><a href="#">Notifications</a></li>
                                     <li><a href="#">User Preferences</a></li>
-
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Logout</a></li>
                                 </ul>

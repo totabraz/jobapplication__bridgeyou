@@ -67,13 +67,18 @@
                     <label for="city">Ride in group?</label>
                     <div class="flex-row -center">
                         <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Always
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">Always
+                              <span class="checkmark"></span>
+
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Sometimes
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Sometimes
+                              <span class="checkmark"></span>
+
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Never
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">Never
+                              <span class="checkmark"></span>
                         </label>
                     </div>
                 </div>
