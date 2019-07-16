@@ -15,4 +15,6 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+
 node_modules
+bower_components
