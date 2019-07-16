@@ -1,7 +1,3 @@
-
-
-
-
 <div class="container">
     <div class="row">
         <div class="header-area">
@@ -9,7 +5,7 @@
                 <span>Users</span>
                 <span class="line"></span>
             </h1>
-            <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-3">
+            <div class="searchUserList-area form-group col-xs-12 col-sm-4 col-md-4 col-lg-3">
                 <input id="searchUserList" class="form-control" type="text" placeholder="Filter table content">
             </div>
         </div>
@@ -37,18 +33,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

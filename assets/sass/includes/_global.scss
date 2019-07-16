@@ -78,6 +78,12 @@ a>i {
 	margin-right: 15px;
 }
 
+.searchUserList-area {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
 table>tfoot,
 .table>thead,
 .table>tbody {
@@ -85,6 +91,24 @@ table>tfoot,
 	tr,
 	th {
 		min-height: 55px;
+
+		td {
+            padding: 15px;
+			border-top: none;
+		}
+	}
+
+	tr:nth-of-type(2n - 2) {
+		background-color: $grey-super-light;
+	}
+
+
+	tr:hover {
+		background-color: darken($grey-super-light, 5%);
+
+		.table-btn-trash {
+			display: inline-block;
+		}
 	}
 
 	.area-btn-trash {
@@ -93,13 +117,8 @@ table>tfoot,
 	}
 
 	.table-btn-trash {
-		display: none;
-	}
-
-	tr:hover {
-		.table-btn-trash {
-			display: inline-block;
-		}
+        padding: 10px;
+        display: none;
 	}
 }
 
