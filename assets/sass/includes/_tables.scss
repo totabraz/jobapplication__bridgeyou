@@ -1,0 +1,37 @@
+
+table>tfoot,
+.table>thead,
+.table>tbody {
+
+	tr,
+	th {
+		min-height: 55px;
+
+		td {
+			padding: 15px;
+			border-top: none;
+		}
+	}
+
+	tr:nth-of-type(2n - 2) {
+		background-color: $grey-super-light;
+	}
+
+	tr:hover {
+		background-color: darken($grey-super-light, 5%);
+
+		.table-btn-trash {
+			display: inline-block;
+		}
+	}
+
+	.area-btn-trash {
+		min-width: 60px;
+		padding: 0px;
+	}
+
+	.table-btn-trash {
+		padding: 10px;
+		display: none;
+	}
+}

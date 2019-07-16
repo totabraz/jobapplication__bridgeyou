@@ -1,0 +1,24 @@
+.brand-header{
+    .title{ 
+        margin: 0;
+    }
+}
+.main-header {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-top: 25px;
+
+	.line {
+		width: 100%;
+		height: 2px;
+		background-color: $grey-light;
+		margin-left: 50px;
+	}
+}
+
+.header-area {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+}

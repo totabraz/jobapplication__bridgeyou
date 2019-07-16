@@ -40,19 +40,27 @@ function updateUsersTable($user = null) {
 }
 
 function getUsers() {
+    $usersIDs = [];
 	$.ajax({
 		url: "https://jsonplaceholder.typicode.com/users",
 		dataType: 'json',
 		contentType: 'application/json; charset=utf-8;',
 		success: function ($usersResult) {
 			for ($index = 0; $index < $usersResult.length; $index++) {
-				$('#userlist tbody:last-child').append(updateUsersTable($usersResult[$index]));
+                $('#userlist tbody:last-child').append(updateUsersTable($usersResult[$index]));
+                
+                $("#name-nav-dropdown").html($usersResult[$index]['name']);
+                $textVec = $usersResult[$index]['name'].split(' ');
+                $txt = $textVec[0][0] + $textVec[1][0];
+                $("#initials").html($txt);
+                $id = $usersResult[$index]['userId'];
+                $usersIDs[$id]=$id;
 			}
 		},
 		error: function ($usersResult) {},
 		complete: function () {
 			getPost();
-			getAlbums();
+			getAlbums($usersIDs);
 		}
 	});
 }
@@ -81,8 +89,9 @@ function getPost() {
 }
 
 // getting ALBUMS from users
-function getAlbums() {
-	$albumsList = {};
+function getAlbums($usersIDs) {
+    $albumsList = {};
+    $albumsIDs = []
 	$.ajax({
 		url: "https://jsonplaceholder.typicode.com/albums",
 		dataType: 'json',
@@ -92,16 +101,45 @@ function getAlbums() {
 				$userID = $albumsResult[$album]['userId'];
 				if ($albumsList[$userID] == undefined) $albumsList[$userID] = 0;
 				$albumsList[$userID] = (($albumsList[$userID]) > 0) ? $albumsList[$userID] + 1 : 1;
-				$albumsList[$userID]['userId'] = $userID;
+                $albumsList[$userID]['userId'] = $userID;
+                
 			}
 			$("#userlist tbody tr[data-user-id]").each(function () {
 				$userId = $(this).data("user-id");
-				$(this).find('.td-albums').html($albumsList[$userId]);
+                $(this).find('.td-albums').html($albumsList[$userId]);
 			});
 		},
 		error: function ($albumsResult) {},
 		complete: function () {
-			// getPhotos($albumsList);
+			getPhotos($usersIDs);
+		}
+	});
+}
+
+
+// getting ALBUMS from users
+function getPhotos($usersIDs) {
+    $photosList = {};
+	$.ajax({
+		url: "https://jsonplaceholder.typicode.com/photos",
+		dataType: 'json',
+		contentType: 'application/json; charset=utf-8;',
+		success: function ($photosResult) {
+            console.log($usersIDs);
+			for ($photo in $photosResult) {
+				$userID = $photosResult[$photo]['userId'];
+				if ($photosList[$userID] == undefined) $photosList[$userID] = 0;
+				$photosList[$userID] = (($photosList[$userID]) > 0) ? $photosList[$userID] + 1 : 1;
+                $photosList[$userID]['userId'] = $userID;
+                
+			}
+			$("#userlist tbody tr[data-user-id]").each(function () {
+				$userId = $(this).data("user-id");
+                $(this).find('.td-photos').html($photosList[$userId]);
+			});
+		},
+		error: function ($photosResult) {},
+		complete: function () {
 		}
 	});
 }
@@ -110,7 +148,7 @@ function getAlbums() {
 function openModal() {
 	$modal = $('#myModal');
 	$modal.css({
-		"display": "block",
+		"display": "flex",
 		"padding-right": "15px"
 	});
 	if (!$modal.hasClass('in')) $modal.addClass('in');
@@ -126,9 +164,7 @@ function closeModal() {
 
 function checkToRemoveUser($id = 0) {
 
-	console.log($id);
 	if ($id !== null) {
-		console.log("foi");
 		$("#modal-user-id").html($id);
 		openModal();
 	}
