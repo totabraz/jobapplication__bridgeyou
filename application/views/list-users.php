@@ -61,10 +61,15 @@
 
 <div class="container">
     <div class="row">
-        <h1 class="main-header col-xs-12 col-sm-8 col-md-8 col-lg-9">
-            <span>Header</span>
-            <span class="line"></span>
-        </h1>
+        <div class="header-area">
+            <h1 class="main-header col-xs-12 col-sm-8 col-md-8 col-lg-9">
+                <span>Header</span>
+                <span class="line"></span>
+            </h1>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                <input id="searchUserList" type="text" placeholder="Filter table content">
+            </div>
+        </div>
 
         <div class="table-responsive col-xs-12">
             <table id="userlist" class="table">
@@ -90,6 +95,24 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script>
     function generateDaysOfWeek() {
         $days = Array("Every day", "Week days", "Mon, Tue, Wed", "Weekends", "Fri, Sun", "Mon", "Wed");
@@ -104,7 +127,7 @@
     function updateUsersTable($user = null) {
         $return = '';
         if ($user != null && $user['id'] != null) {
-            $return += "<tr data-user-id='" + $user['id'] + "' data-user-username='username' >";
+            $return += "<tr id='tr-user-id-" + $user['id'] + "' data-user-id='" + $user['id'] + "' data-user-username='username' >";
             if ($user['username'] != null) $return += "<td class='td-username'>" + $user['username'] + "</td>";
             else $return += "<td class='td-username'> - </td>";
             if ($user['name'] != null) $return += "<td class='td-name'>" + $user['name'] + "</td>";
@@ -123,7 +146,7 @@
             else $return += "<td class='td-albums'> - </td>";
             if ($user['photos'] != null) $return += "<td class='td-photos'>" + $user['photos'] + "</td>";
             else $return += "<td class='td-photos'> - </td>";
-            $return += "<td class='area-btn-trash'> <a href='#' class='table-btn-trash btn btn-w'><i class='fas fa-trash'></i></a> </td>";
+            $return += "<td class='area-btn-trash'> <a href='javascript:checkToRemoveUser(" + $user['id'] + ");' class='table-btn-trash btn btn-w' title='Remove this user'><i class='fas fa-trash'></i></a> </td>";
         } else {
             $return += "<tr>";
             $return += '<td>Without users</td>';
@@ -194,40 +217,81 @@
             },
             error: function($albumsResult) {},
             complete: function() {
-                getPhotos($albumsList);
+                // getPhotos($albumsList);
             }
         });
     }
 
-    // getting Photos from users
-    // function getPhotos($albumsList = null) {
-    //     $.ajax({
-    //         url: "https://jsonplaceholder.typicode.com/photos",
-    //         dataType: 'json',
-    //         contentType: 'application/json; charset=utf-8;',
-    //         success: function($photosResult) {
-    //             console.log($albumsList);                $photosList = {};
-    //             for ($photo in $photosResult) {
-    //                 $userID = $photosResult[$photo]['userId'];
-    //                 if ($photosList[$userID] == undefined) {
-    //                     $photosList[$userID] = 0;
-    //                 } else {
-    //                     $photosList[$userID]['total_posts'] = (($photosList[$userID]) > 0) ? $photosList[$userID] + 1 : 1;
-    //                     $photosList[$userID] = (($photosList['albumId']) != null) ? $postsResult[albumId] + 1 : 1;
-    //                 }
-    //             }                $("#userlist tbody tr[data-user-id]").each(function() {
-    //                 $userId = $(this).data("user-id");
-    //                 $(this).find('.td-photos').html($photosList[$userId]);
-    //             });                console.log('foi');            },
-    //         error: function($photosResult) {
-    //             console.log('deu ruim');
-    //         }
-    //     });
-    // }
 
+    function openModal() {
+        $modal = $('#myModal');
+        $modal.css({
+            "display": "block",
+            "padding-right": "15px"
+        });
+        if (!$modal.hasClass('in')) $modal.addClass('in');
+    }
+
+    function closeModal() {
+        $modal = $('#myModal');
+        $('#myModal').css({
+            "display": "none"
+        });
+        if ($modal.hasClass('in')) $modal.removeClass('in');
+    }
+
+    function checkToRemoveUser($id = 0) {
+
+        console.log($id);
+        if ($id !== null) {
+            console.log("foi");
+            $("#modal-user-id").html($id);
+            openModal();
+        }
+    }
+
+    function removeUser($id = null) {
+        $id = $("#modal-user-id").html();
+        $rowToRemove = $('#tr-user-id-' + $id);
+        $rowToRemove.remove();
+        closeModal();
+    }
 
     $(document).ready(function() {
         $tableUserlistBody = $('#userlist tbody');
         getUsers();
+
+        $('.table-btn-trash').click(function(event) {
+            event.preventDefault();
+            console.log($(this).data('user-id'));
+        });
+
+
+        $("#searchUserList").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#userlist tbody tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
     });
 </script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirm to delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Delete user id: <span id="modal-user-id"></span></p>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:closeModal();" class="btn btn-default">Close</a>
+                <a href="javascript:removeUser();" class="btn btn-danger">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>

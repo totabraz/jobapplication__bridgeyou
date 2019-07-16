@@ -2,6 +2,21 @@ body {
 	color: $text;
 }
 
+a, a>i {
+    
+	color: $green-dark;
+
+	&:visited {
+		color: $green-dark;
+	}
+
+	&:hover,
+	&:active {
+		color: darken($green-dark, 15%);
+		text-decoration: none;
+	}
+}
+
 .breadcrumb {
 	margin-bottom: 0;
 }
@@ -19,6 +34,8 @@ body {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	margin-top: 25px;
+	margin-bottom: 25px;
 
 	.line {
 		width: 100%;
@@ -49,25 +66,34 @@ body {
 table>tfoot,
 .table>thead,
 .table>tbody {
-    tr, th{
-        min-height: 55px;
-    }
-    .area-btn-trash{
-        min-width: 60px;
-        padding: 0px;
-    }
-	.table-btn-trash {
-        display: none;
-    }
-    tr:hover{
-        .table-btn-trash {
-            display: inline-block;
-        }
-    }
 
-	// tr:hover {
-	// 	.table-btn-trash {
-	// 		display: inline-block;
-	// 	}
-	// }
+	tr,
+	th {
+		min-height: 55px;
+	}
+
+	.area-btn-trash {
+		min-width: 60px;
+		padding: 0px;
+	}
+
+	.table-btn-trash {
+		display: none;
+	}
+
+	tr:hover {
+		.table-btn-trash {
+			display: inline-block;
+		}
+	}
+}
+
+.header-area {
+	display: flex;
+	justify-content: stretch;
+	align-items: center;
+}
+
+#searchUserList{
+    padding-left: 25px;
 }
