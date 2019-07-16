@@ -14,18 +14,18 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-livereload": "^3.8.1",
     "gulp-sass": "^2.1.0",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-livereload": "^3.8.1",
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.7",
-    "gulp-watch": "^4.3.5",
-    "gulp-imagemin": "^3.0.1"
+    "gulp-watch": "^4.3.5"
   },
   "dependencies": {
-    "slick-carousel": "^1.7.1",
     "bootstrap": "^3.4.0",
     "bootstrap-colorpicker": "^2.5.3",
     "bootstrap-datepicker": "^1.8.0",
@@ -39,6 +39,7 @@
     "fastclick": "^1.0.6",
     "flot": "^0.8.3",
     "font-awesome": "^4.7.0",
+    "fontawesome": "^5.6.3",
     "fullcalendar": "^3.10.0",
     "inputmask": "^3.3.7",
     "ion-rangeslider": "^2.3.0",
@@ -53,6 +54,7 @@
     "pace": "0.0.4",
     "raphael": "^2.2.7",
     "select2": "^4.0.3",
+    "slick-carousel": "^1.7.1",
     "slimscroll": "^0.9.1"
   }
 }
